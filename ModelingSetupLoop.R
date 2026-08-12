@@ -11,10 +11,10 @@ library(gridExtra)
 
 # Read in data files =============================
 
-# detections
-detections <- read.csv("Data/metadata.csv")
+# Read in selection tables metadata
+detections <- read.csv("PATH/TO/YOUR/FILE/metadata.csv")
 
-# add column giving recording name
+# Add column giving recording name
 detections$recording <- sub("\\..*", "", detections$Site)
 
 View(detections)
@@ -30,22 +30,25 @@ detections$Harmonics[indices] <- "NONE"
 
 num_species <- length(unique(detections$Species))
 
-# Recordings
+
+# Read in recordings metadata
 recordings <- readxl::read_excel(
-  path = "Data/Recordings.xlsx",
-  col_types = c("text", "date", "numeric","numeric", "numeric", "numeric","numeric", "numeric", "numeric", "numeric"))
+  path = "PATH/TO/YOUR/FILE/Recordings.xlsx",
+  col_types = c("text", "date", "numeric","numeric", "numeric", "numeric","numeric", "numeric", "numeric", "numeric")) # change this depending on the variables you are testing!
 
 str(recordings)
-recordings$Year <- as.numeric(format(recordings$Date, "%Y"))
-recordings$DOY <- lubridate::yday(recordings$Date)
+recordings$Year <- as.numeric(format(recordings$Date, "%Y")) # change this depending on the variables you are testing!
+recordings$DOY <- lubridate::yday(recordings$Date) # change this depending on the variables you are testing!
 
 # order and add recording number and Period
+# change this depending on the variables you are testing!
 recordings <- recordings %>%
   arrange(Date, StartTime) %>%
   mutate(RecordingNumber = 1:nrow(recordings)) %>%
   mutate(Duration = Duration_sec) %>%
   select(-c(Duration_sec, PercentofRecordingwithSong))
 
+# Decide here how many periods your want
 recordings$Period <- NA
 recordings$Period[recordings$Year %in% c(2007, 2008, 2009)] <- 1
 recordings$Period[recordings$Year %in% c(2013, 2014, 2015)] <- 2
@@ -58,17 +61,17 @@ table(recordings$Period)
 summary(recordings)
 View(recordings)
 
-# merge datasets ------------------------
+# Merge datasets ------------------------
 df <- merge(
   x = detections,
   y = recordings,
   by.x = 'recording',
-  by.y = "FileName")
+  by.y = "FileName") # change depending on what you have called your column for file names in "recordings"
 
 str(df)
 head(df)
 
-# make some summary plots - sparse signals
+# make a summary plot - sparse signals
 g_raw <- ggplot2::ggplot(df, aes(x = factor(Species), fill = factor(Period))) +
   geom_histogram(stat = "count") +
   coord_flip() +
@@ -82,11 +85,11 @@ g_raw <- ggplot2::ggplot(df, aes(x = factor(Species), fill = factor(Period))) +
 
 g_raw
 
-# set the surveys
+# Decide how many surveys your want per period
 j = 2
 
-# each recording is cut into sections of equal length
-# assign the survey to each detection
+# Each recording is cut into sections of equal length
+# Assign the survey to each detection
 assign_surveys <- function(duration, signal_time, num_surveys = survey) {
   breaks <- seq(0, duration, length.out = j + 1) # Divide media file into equal parts
   cut(signal_time, breaks = breaks, labels = FALSE, include.lowest = TRUE) # Assign survey
@@ -135,11 +138,11 @@ eh <- freq_table %>%
   ungroup()
 
 dim(eh)
-num_species*17
+num_species*17 # change to your number of species
 View(eh)
 
 # generate site covariates - related to year and signals ======================
-site_covs <- df %>%
+site_covs <- df %>% # Change the following depending on your variables of choice
   group_by(Species)%>% # allows us to do all of the following operations for each species group
   mutate(Mean_Peak_Freq = mean(Peak_Freq)/1000) %>%
   mutate(Max_Peak_Freq = max(Peak_Freq)/1000) %>%
@@ -169,7 +172,7 @@ site_covs <- site_covs %>%
   arrange(recording, Species)
 
 dim(site_covs)
-num_species*17
+num_species*17 # change to your number of species
 str(site_covs)
 summary(site_covs)
 View(site_covs)
@@ -185,7 +188,7 @@ survey_covs <- recordings  %>%
   mutate(DOY = as.numeric(DOY/100)) %>%
   mutate(Duration = as.numeric(Duration/60/60)) %>%
   mutate(Year = Year-2000) %>%
-  select(Date, Duration, SST, Year, DOY, RecordingNumber, Period)
+  select(Date, Duration, SST, Year, DOY, RecordingNumber, Period) # change depending on your variables of choice
 
 survey_covs <- as.data.frame(survey_covs)
 
@@ -216,8 +219,8 @@ lapply(survey_covs_list, FUN = head)
 
 View(survey_covs_list$Period)
 
-# message(paste0("The number of survey covs should be # species * # of recordings, 17)
-message(num_species*17)
+# message(paste0("The number of survey covs should be # species * # of recordings)
+message(num_species*17) # replace with your number of species)
 
 # create model set for occupancy analysis ========================
 names(site_covs)
@@ -234,7 +237,7 @@ psimodels <- c(
 )
 
 
-# probability of detection for a unit issued but not detected
+# probability of detection for a unit issued but not necessarily detected
 names(survey_covs_list)
 lapply(survey_covs_list, FUN = summary)
 pmodels <- c(
@@ -244,8 +247,6 @@ pmodels <- c(
   "SURVEY * Period + SST"
 )
 
-#==============================================================================
-
 # create model set (all combinations)
 modelset <- expand.grid(
   psi = psimodels,
@@ -253,6 +254,8 @@ modelset <- expand.grid(
 
 dim(modelset)
 View(modelset)
+
+#==============================================================================
 
 # begin occupancy analysis --------------------------------------------
 
@@ -348,7 +351,7 @@ aic_ms <- aictable$table[, ] %>%
 
 aic_ms
 
-write.csv(aic_ms, "Tables/aic.csv")
+write.csv(aic_ms, "PATH/WHERE/YOU/WANT/TO/SAVE/aic.csv")
 
 
 # read in the top model
@@ -358,7 +361,6 @@ topmod$modname
 
 summary(topmod)
 methods(class = class(topmod))
-
 
 
 # re-run to obtain goodness of fit ==============
@@ -401,7 +403,7 @@ modelcoefs <- modelcoefs %>%
 View(modelcoefs)
 
 # save as table S2
-write.csv(modelcoefs, file = "Tables/modelcoefs.csv")
+write.csv(modelcoefs, file = "PATH/TO/WHERE/YOU/WANT/TO/SAVE/modelcoefs.csv")
 
 ###  GRAPHING ===========================
 
