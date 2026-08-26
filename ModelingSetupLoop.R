@@ -9,10 +9,14 @@ library(lubridate)
 library(ggplot2)
 library(gridExtra)
 
+# Set your working directory
+
+setwd("C:/Users/YOURNAME/PATH/OccModWhale")
+
 # Read in data files =============================
 
 # Read in selection tables metadata
-detections <- read.csv("PATH/TO/YOUR/FILE/metadata.csv")
+detections <- read.csv("selections_metadata.csv")
 
 # Add column giving recording name
 detections$recording <- sub("\\..*", "", detections$Site)
