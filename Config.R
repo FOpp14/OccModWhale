@@ -2,7 +2,7 @@
 #   1. FormattingSelections.R
 #   2. ModelingSetupLoop.R
 
-# Edit this file before running the analysis.
+# Edit this file before running the analysis!
 
 # FO
 # 9/4/26
@@ -162,7 +162,6 @@ site_covariates <- c(
 )
 
 # Variables for modeling occupancy probability  ---------------------------------
-
 
 occupancy_models <- c(
   "Mean_Peak_Freq * Period",
