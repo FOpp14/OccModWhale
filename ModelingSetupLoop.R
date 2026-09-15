@@ -9,14 +9,13 @@ library(lubridate)
 library(ggplot2)
 library(gridExtra)
 
-# Set your working directory
-
-setwd("C:/Users/YOURNAME/PATH/OccModWhale")
+source("Config.r")
+setwd(project_dir)
 
 # Read in data files =============================
 
 # Read in selection tables metadata
-detections <- read.csv("selections_metadata.csv")
+detections <- read.csv(selections_metadata_file)
 
 # Add column giving recording name
 detections$recording <- sub("\\..*", "", detections$Site)
@@ -37,8 +36,8 @@ num_species <- length(unique(detections$Species))
 
 # Read in recordings metadata
 recordings <- readxl::read_excel(
-  path = "PATH/TO/YOUR/FILE/Recordings.xlsx",
-  col_types = c("text", "date", "numeric","numeric", "numeric", "numeric","numeric", "numeric", "numeric", "numeric")) # change this depending on the variables you are testing!
+  path = recordings_file,
+  col_types = recording_col_types)
 
 str(recordings)
 recordings$Year <- as.numeric(format(recordings$Date, "%Y")) # change this depending on the variables you are testing!
@@ -52,12 +51,11 @@ recordings <- recordings %>%
   mutate(Duration = Duration_sec) %>%
   select(-c(Duration_sec, PercentofRecordingwithSong))
 
-# Decide here how many periods your want
+# Periods (number and year ranges) are set in Config.R as period_years
 recordings$Period <- NA
-recordings$Period[recordings$Year %in% c(2007, 2008, 2009)] <- 1
-recordings$Period[recordings$Year %in% c(2013, 2014, 2015)] <- 2
-recordings$Period[recordings$Year %in% c(2017, 2018, 2019)] <- 3
-recordings$Period[recordings$Year %in% c(2023)] <- 4
+for (p in seq_along(period_years)) {
+  recordings$Period[recordings$Year %in% period_years[[p]]] <- p
+}
 
 recordings$Period <- as.factor(recordings$Period)
 str(recordings)
@@ -90,7 +88,7 @@ g_raw <- ggplot2::ggplot(df, aes(x = factor(Species), fill = factor(Period))) +
 g_raw
 
 # Decide how many surveys your want per period
-j = 2
+j = num_surveys
 
 # Each recording is cut into sections of equal length
 # Assign the survey to each detection
@@ -128,7 +126,7 @@ names(freq_table) <- c("Species", "Recording", "Survey", "Freq", "Detected")
 View(freq_table)
 
 dim(freq_table)
-num_species*j*17
+num_species*j*num_recordings
 
 # frequency column is left in for checking
 eh <- freq_table %>%
@@ -142,26 +140,35 @@ eh <- freq_table %>%
   ungroup()
 
 dim(eh)
-num_species*17 # change to your number of species
+num_species*num_recordings # change to your number of species
 View(eh)
 
 # generate site covariates - related to year and signals ======================
 site_covs <- df %>% # Change the following depending on your variables of choice
   group_by(Species)%>% # allows us to do all of the following operations for each species group
-  mutate(Mean_Peak_Freq = mean(Peak_Freq)/1000) %>%
-  mutate(Max_Peak_Freq = max(Peak_Freq)/1000) %>%
-  mutate(Min_Peak_Freq = min(Peak_Freq)/1000) %>%
+  mutate(Mean_Peak_Freq = mean(Peak_Freq)/peak_frequency_divisor) %>%
+  mutate(Max_Peak_Freq = max(Peak_Freq)/peak_frequency_divisor) %>%
+  mutate(Min_Peak_Freq = min(Peak_Freq)/peak_frequency_divisor) %>%
   mutate(Mean_Duration_s = mean(Duration_s)) %>%
   mutate(Max_Duration_s = max(Duration_s)) %>%
   mutate(Min_Duration_s = min(Duration_s)) %>%
   mutate(Species = as.factor(Species)) %>%
   arrange(Species) %>%
   ungroup() %>%
-  select(Species, Contour, Tone_Type, Harmonics, Mean_Duration_s, Max_Duration_s,
-         Min_Duration_s, Mean_Peak_Freq, Max_Peak_Freq, Min_Peak_Freq) %>%
-  distinct(Species, .keep_all = TRUE)
+  select(Species,
+         Contour,
+         Tone_Type,
+         Harmonics,
+         Mean_Duration_s,
+         Max_Duration_s,
+         Min_Duration_s,
+         Mean_Peak_Freq,
+         Max_Peak_Freq,
+         Min_Peak_Freq
+         ) %>%
+    distinct(Species, .keep_all = TRUE)
 
-# replicate site_covs 17 times
+# replicate site_covs * num_recordings
 site_covs  <- do.call(rbind, replicate(n = nrow(recordings), site_covs, simplify = FALSE))
 
 # add a few columns
@@ -176,7 +183,7 @@ site_covs <- site_covs %>%
   arrange(recording, Species)
 
 dim(site_covs)
-num_species*17 # change to your number of species
+num_species*num_recordings # change to your number of species
 str(site_covs)
 summary(site_covs)
 View(site_covs)
@@ -188,11 +195,11 @@ names(recordings)
 recordings <- as.data.frame(recordings)
 
 survey_covs <- recordings  %>%
-  mutate(SST = as.numeric(SST/10)) %>%
-  mutate(DOY = as.numeric(DOY/100)) %>%
-  mutate(Duration = as.numeric(Duration/60/60)) %>%
+  mutate(SST = if (transform_SST) as.numeric(SST/SST_divisor) else SST) %>%
+  mutate(DOY = if (transform_DOY) as.numeric(DOY/DOY_divisor) else DOY) %>%
+  mutate(Duration = if (tranform_Duration) as.numeric(Duration/Duration_divisor) else Duration) %>%
   mutate(Year = Year-2000) %>%
-  select(Date, Duration, SST, Year, DOY, RecordingNumber, Period) # change depending on your variables of choice
+  select(surv_covariates)
 
 survey_covs <- as.data.frame(survey_covs)
 
@@ -224,32 +231,19 @@ lapply(survey_covs_list, FUN = head)
 View(survey_covs_list$Period)
 
 # message(paste0("The number of survey covs should be # species * # of recordings)
-message(num_species*17) # replace with your number of species)
+message(num_species*num_recordings) # replace with your number of species)
 
 # create model set for occupancy analysis ========================
 names(site_covs)
 
 # occupancy probability
-psimodels <- c(
-  "Mean_Peak_Freq * Period",
-  "Max_Duration_s * Period",
-  "Tone_Type * Period",
-  "Mean_Peak_Freq * Period + Max_Duration_s * Period",
-  "Mean_Peak_Freq * Period + Tone_Type * Period",
-  "Tone_Type * Period + Max_Duration_s * Period",
-  "Mean_Peak_Freq * Period + Max_Duration_s * Period + Tone_Type * Period"
-)
+psimodels <- occupancy_models
 
 
 # probability of detection for a unit issued but not necessarily detected
 names(survey_covs_list)
 lapply(survey_covs_list, FUN = summary)
-pmodels <- c(
-  "SURVEY * Period",
-  "SURVEY * Period + Duration",
-  "SURVEY * Period + DOY",
-  "SURVEY * Period + SST"
-)
+pmodels <- detection_models
 
 # create model set (all combinations)
 modelset <- expand.grid(
@@ -269,7 +263,7 @@ pao <- createPao(
   unitcov = site_covs,
   survcov = survey_covs_list,
   nsurveyseason = j,
-  methods = 1
+  methods = pao_method
 )
 
 model_outputs <- list()
@@ -289,7 +283,7 @@ for (k in 1:nrow(modelset)) {
     data = pao,
     modfitboot = NULL,
     type = "so", # "so.cd",  "so.het" "so"
-    maxfn = 128000)
+    maxfn = max_function_evaluations)
 
   # send feedback
   message(mod_k$modname)
@@ -301,7 +295,7 @@ for (k in 1:nrow(modelset)) {
 
   # pause a few seconds
   gc()
-  Sys.sleep(0.5)
+  Sys.sleep(model_pause_seconds)
 
 } #end of model k
 
@@ -327,7 +321,10 @@ for (g in 1:length(model_outputs)) {
 issues
 
 # remove problematic models with issues  issues$VC == "Yes" |
-indices <- which(issues$warnings < 3)
+indices <- which(issues$warnings < convergence_warning_threshold)
+if (remove_VC_problem_models) {
+  indices <- union(indices, which(issues$VC == "Yes"))
+}
 View(issues[indices,])
 
 if(length(indices) > 0) {model_outputs <- model_outputs[-indices]}
@@ -344,9 +341,9 @@ aictable <- createAicTable(
 View(aictable$table)
 names(aictable$table)
 
-# save aic table (as table 2 in ms)
+# save aic table
 mods_to_save <- c(0, cumsum(aictable$table$wgt))
-mods_to_save <- which(mods_to_save < 0.95)
+mods_to_save <- which(mods_to_save < model_weight_cutoff)
 
 aic_ms <- aictable$table[, ] %>%
   select(-c(warn.conv, warn.VC, modlike)) %>%
@@ -355,11 +352,11 @@ aic_ms <- aictable$table[, ] %>%
 
 aic_ms
 
-write.csv(aic_ms, "PATH/WHERE/YOU/WANT/TO/SAVE/aic.csv")
+write.csv(aic_ms, aic_file)
 
 
 # read in the top model
-topmod_name <- aictable$table$Model[1]
+topmod_name <- if (is.null(top_model_override)) aictable$table$Model[1] else top_model_override
 topmod <- model_outputs[[topmod_name]]
 topmod$modname
 
@@ -368,15 +365,13 @@ methods(class = class(topmod))
 
 
 # re-run to obtain goodness of fit ==============
+# uses whichever model was selected as topmod above
 topmod <- occMod(
-  model = list(
-    as.formula("psi ~ Mean_Peak_Freq*Period+Max_Duration_s*Period+Tone_Type*Period"),
-    as.formula("p ~ SURVEY*Period + Duration")
-  ),
+  model = model_outputs[[topmod_name]]$model,
   data = pao,
-  modfitboot = 500,
-  type = "so", # "so.cd",  "so.het" "so"
-  maxfn = 128000)
+  modfitboot = gof_bootstrap,
+  type = occupancy_model_type, # "so.cd", "so.het", "so"
+  maxfn = max_function_evaluations)
 
 topmod$gof
 
@@ -407,7 +402,7 @@ modelcoefs <- modelcoefs %>%
 View(modelcoefs)
 
 # save as table S2
-write.csv(modelcoefs, file = "PATH/TO/WHERE/YOU/WANT/TO/SAVE/modelcoefs.csv")
+write.csv(modelcoefs, file = model_coefs_file)
 
 ###  GRAPHING ===========================
 
@@ -578,10 +573,10 @@ scovs <- as.data.frame(do.call(cbind, lapply(survey_covs_list, function(x) as.nu
 dim(scovs)
 str(scovs)
 
-plot_p <- cbind(modAvgp[1:(num_species*17),], scovs)
+plot_p <- cbind(modAvgp[1:(num_species*num_recordings),], scovs)
 
 dim(plot_p)
-17*num_species
+num_recordings*num_species
 
 str(plot_p)
 str(modAvgp)

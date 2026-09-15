@@ -4,9 +4,8 @@
 ## FO
 
 # set the path to your files
-path <- "~/PATH/TO/YOUR/CSV_FOLDER"
+source("config.R")
 
-path <- "/Users/frannyoppenheimer/Desktop/R/AMP/2007-2023 CSVs"
 
 # list all files in your folder of selection csvs
 
@@ -116,6 +115,6 @@ for (i in seq_len(length(filelist))) {
 View(df)
 
 
-write.csv(df, file = "selections_metadata.csv")
+write.csv(df, file = "selections_metadata_file.csv")
 
 #########
