@@ -17,8 +17,9 @@ setwd(project_dir)
 # Read in selection tables metadata
 detections <- read.csv(selections_metadata_file)
 
-# Add column giving recording name
-detections$recording <- sub("\\..*", "", detections$Site)
+# Add column for clean recording name
+detections$recording <- sub("_Table_[0-9]+_selections\\.csv$", "", detections$Site, ignore.case = TRUE)
+detections$recording <- sub("_+$", "", detections$recording)  # drop any trailing underscore(s)
 
 View(detections)
 str(detections)
@@ -199,7 +200,7 @@ survey_covs <- recordings  %>%
   mutate(DOY = if (transform_DOY) as.numeric(DOY/DOY_divisor) else DOY) %>%
   mutate(Duration = if (transform_Duration) as.numeric(Duration/Duration_divisor) else Duration) %>%
   mutate(Year = Year-2000) %>%
-  select(surv_covariates)
+  select(all_of(surv_covariates))
 
 survey_covs <- as.data.frame(survey_covs)
 
