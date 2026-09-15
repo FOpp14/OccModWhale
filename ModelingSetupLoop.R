@@ -9,7 +9,7 @@ library(lubridate)
 library(ggplot2)
 library(gridExtra)
 
-source("Config.r")
+source("Config.R")
 setwd(project_dir)
 
 # Read in data files =============================
@@ -146,9 +146,9 @@ View(eh)
 # generate site covariates - related to year and signals ======================
 site_covs <- df %>% # Change the following depending on your variables of choice
   group_by(Species)%>% # allows us to do all of the following operations for each species group
-  mutate(Mean_Peak_Freq = mean(Peak_Freq)/peak_frequency_divisor) %>%
-  mutate(Max_Peak_Freq = max(Peak_Freq)/peak_frequency_divisor) %>%
-  mutate(Min_Peak_Freq = min(Peak_Freq)/peak_frequency_divisor) %>%
+  mutate(Mean_Peak_Freq = mean(Peak_Freq_Hz)/peak_frequency_divisor) %>%
+  mutate(Max_Peak_Freq = max(Peak_Freq_Hz)/peak_frequency_divisor) %>%
+  mutate(Min_Peak_Freq = min(Peak_Freq_Hz)/peak_frequency_divisor) %>%
   mutate(Mean_Duration_s = mean(Duration_s)) %>%
   mutate(Max_Duration_s = max(Duration_s)) %>%
   mutate(Min_Duration_s = min(Duration_s)) %>%
@@ -197,7 +197,7 @@ recordings <- as.data.frame(recordings)
 survey_covs <- recordings  %>%
   mutate(SST = if (transform_SST) as.numeric(SST/SST_divisor) else SST) %>%
   mutate(DOY = if (transform_DOY) as.numeric(DOY/DOY_divisor) else DOY) %>%
-  mutate(Duration = if (tranform_Duration) as.numeric(Duration/Duration_divisor) else Duration) %>%
+  mutate(Duration = if (transform_Duration) as.numeric(Duration/Duration_divisor) else Duration) %>%
   mutate(Year = Year-2000) %>%
   select(surv_covariates)
 

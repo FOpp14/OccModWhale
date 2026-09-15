@@ -4,7 +4,7 @@
 ## FO
 
 # set the path to your files
-source("config.R")
+source("Config.R")
 
 
 # list all files in your folder of selection csvs
