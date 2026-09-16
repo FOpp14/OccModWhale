@@ -18,6 +18,8 @@ ____________________________________________________________________
 
 - The RPresence package, which we used in R to build and run our occupancy models, downloaded and installed (see here: https://www.usgs.gov/software/presence)
 
+- The file Config.R from this github repo
+
 - The file FormattingData.R from this github repo
 
 - The file ModelingSetupLoop.R from this github repo
