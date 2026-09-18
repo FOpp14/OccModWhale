@@ -6,17 +6,17 @@ This repo contains scripts and instructions for using occupancy modeling as a fr
 
 ____________________________________________________________________
 
-You can read our proposed methodology here: https://onlinelibrary.wiley.com/doi/10.1111/mms.70237?af=R 
+You can read our proposed methodology [here](https://onlinelibrary.wiley.com/doi/10.1111/mms.70237?af=R ).
 
-Before you dive in, we recommend familiarizing yourself with the content using occupancyTuts (https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/2041-210X.14285), a tutorial series about occupancy modeling and RPresence. 
+Before you dive in, we recommend familiarizing yourself with the content using [occupancyTuts](https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/2041-210X.14285), a tutorial series about occupancy modeling and RPresence. 
 
 ____________________________________________________________________
 
 ### Things You Will Need:
 
-- R downloaded and installed onto your machine (see here: https://www.r-project.org/)
+- [R](https://www.r-project.org/]) downloaded and installed onto your machine
 
-- The RPresence package, which we used in R to build and run our occupancy models, downloaded and installed (see here: https://www.usgs.gov/software/presence)
+- The [RPresence package](https://www.usgs.gov/software/presence), which we used in R to build and run our occupancy models, downloaded and installed
 
 - The file Config.R from this github repo
 
@@ -46,7 +46,7 @@ ____________________________________________________________________
 
 ### Preformatting Your Selection Tables:
 
-To identify and distinguish between unit types, we used the system developed by Divna Djokic and Franny Oppenheimer, as described here: https://scholarworks.uvm.edu/server/api/core/bitstreams/9ad3f2a6-a87f-416e-97a6-71720fee42ae/content. 
+To identify and distinguish between unit types, we used the system developed by Divna Djokic and Franny Oppenheimer, as described [here](https://scholarworks.uvm.edu/server/api/core/bitstreams/9ad3f2a6-a87f-416e-97a6-71720fee42ae/content)
 
 The formatting document _FormattingData.R_ expects input in the form of multiple RavenPro selection tables in a single folder. 
 
