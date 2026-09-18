@@ -46,7 +46,7 @@ ____________________________________________________________________
 
 ### Preformatting Your Selection Tables:
 
-To identify and distinguish between unit types, we used the system developed by Divna Djokic and Franny Oppenheimer, as described [here](https://scholarworks.uvm.edu/server/api/core/bitstreams/9ad3f2a6-a87f-416e-97a6-71720fee42ae/content)
+To identify and distinguish between unit types, we used the system developed by Divna Djokic and Franny Oppenheimer, as described in [Oppenheimer 2024](https://scholarworks.uvm.edu/server/api/core/bitstreams/9ad3f2a6-a87f-416e-97a6-71720fee42ae/content)
 
 The formatting document _FormattingData.R_ expects input in the form of multiple RavenPro selection tables in a single folder. 
 
