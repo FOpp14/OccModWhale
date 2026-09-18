@@ -18,11 +18,11 @@ ____________________________________________________________________
 
 - The [RPresence package](https://www.usgs.gov/software/presence), which we used in R to build and run our occupancy models, downloaded and installed
 
-- The file Config.R from this github repo
+- The file _Config.R_ from this github repo
 
-- The file FormattingData.R from this github repo
+- The file _FormattingData.R_ from this github repo
 
-- The file ModelingSetupLoop.R from this github repo
+- The file _ModelingSetupLoop.R_ from this github repo
 
 - Your own song unit selection tables from Raven, Audacity, Reaper, etc. - this script uses Raven as default
 
@@ -32,21 +32,19 @@ ____________________________________________________________________
 
 ### Use Checklist:
 
-☐ Establish your desired configurations using Config.R
+☐ Establish your desired configurations using _Config.R_
 
-☐ Preformat your song unit selections using FormattingData.R
+☐ Preformat your song unit selections using _FormattingData.R_
 
 ☐ Preformat your recordings metadata manually by setting up a descriptive excel document
 
-☐ Run ModelingSetupLoop.R
-
-☐ Graph your results
+☐ Run _ModelingSetupLoop.R_ to model and graph your results
 
 ____________________________________________________________________
 
 ### Preformatting Your Selection Tables:
 
-To identify and distinguish between unit types, we used the system developed by Divna Djokic and Franny Oppenheimer, as described in [Oppenheimer 2024](https://scholarworks.uvm.edu/server/api/core/bitstreams/9ad3f2a6-a87f-416e-97a6-71720fee42ae/content)
+To identify and distinguish between unit types, we used the system developed by Divna Djokic and Franny Oppenheimer, as described in [Oppenheimer 2024](https://scholarworks.uvm.edu/server/api/core/bitstreams/9ad3f2a6-a87f-416e-97a6-71720fee42ae/content).
 
 The formatting document _FormattingData.R_ expects input in the form of multiple RavenPro selection tables in a single folder. 
 
