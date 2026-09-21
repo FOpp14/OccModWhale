@@ -15,7 +15,7 @@ setwd(project_dir)
 # Read in data files =============================
 
 # Read in selection tables metadata
-detections <- read.csv(selections_metadata_file)
+detections <- read.csv("selections_metadata_file.csv")
 
 # Add column for clean recording name
 detections$recording <- sub("\\.Table\\.[0-9]+\\.selections\\.csv$", "", detections$Site, ignore.case = TRUE)
