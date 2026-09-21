@@ -18,7 +18,7 @@ setwd(project_dir)
 detections <- read.csv(selections_metadata_file)
 
 # Add column for clean recording name
-detections$recording <- sub("_Table_[0-9]+_selections\\.csv$", "", detections$Site, ignore.case = TRUE)
+detections$recording <- sub("\\.Table\\.[0-9]+\\.selections\\.csv$", "", detections$Site, ignore.case = TRUE)
 detections$recording <- sub("_+$", "", detections$recording)  # drop any trailing underscore(s)
 
 View(detections)
@@ -76,7 +76,7 @@ head(df)
 
 # make a summary plot - sparse signals
 g_raw <- ggplot2::ggplot(df, aes(x = factor(Species), fill = factor(Period))) +
-  geom_histogram(stat = "count") +
+  geom_bar(stat = "count") +
   coord_flip() +
   scale_fill_grey() +
   theme_bw() +

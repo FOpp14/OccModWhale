@@ -9,7 +9,8 @@ source("Config.R")
 
 # list all files in your folder of selection csvs
 
-filelist <- list.files(path, full.names = TRUE)
+filelist <- list.files(selections_dir, full.names = FALSE)
+filelist <- gsub(" ", "_", filelist) # get rid of any lingering spaces
 filelist
 
 
@@ -23,6 +24,7 @@ df <- data.frame()
 # read file into R
 # RBind data into new data frame? (and store name of file)
 
+setwd(selections_dir)
 
 for (i in seq_len(length(filelist))) {
 
@@ -115,6 +117,9 @@ for (i in seq_len(length(filelist))) {
 View(df)
 
 
+setwd(project_dir) # back out to your project directory
 write.csv(df, file = "selections_metadata_file.csv")
-
 #########
+
+
+
