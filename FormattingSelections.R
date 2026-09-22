@@ -1,16 +1,15 @@
 
 ## Formatting song selection csv files from RavenPro for use in occupancy model
-## 10/5/2024
-## FO
+## FO 2024
 
-# set the path to your files
+# read in info from Config.R
 source("Config.R")
 
 
 # list all files in your folder of selection csvs
 
 filelist <- list.files(selections_dir, full.names = FALSE)
-filelist <- gsub(" ", "_", filelist) # get rid of any lingering spaces
+#filelist <- gsub(" ", "_", filelist) # get rid of any lingering spaces
 filelist
 
 

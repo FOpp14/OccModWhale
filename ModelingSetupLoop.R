@@ -1,6 +1,5 @@
 # Setting up a loop for easy-editing of models
-# TD, FO
-# 3/24/25
+# FO, TD, 2025
 
 library(dplyr)
 library(tidyr)
@@ -19,7 +18,6 @@ detections <- read.csv("selections_metadata_file.csv")
 
 # Add column for clean recording name
 detections$recording <- sub("\\.Table\\.[0-9]+\\.selections\\.csv$", "", detections$Site, ignore.case = TRUE)
-detections$recording <- sub("_+$", "", detections$recording)  # drop any trailing underscore(s)
 
 View(detections)
 str(detections)
@@ -166,8 +164,8 @@ site_covs <- df %>% # Change the following depending on your variables of choice
          Mean_Peak_Freq,
          Max_Peak_Freq,
          Min_Peak_Freq
-         ) %>%
-    distinct(Species, .keep_all = TRUE)
+  ) %>%
+  distinct(Species, .keep_all = TRUE)
 
 # replicate site_covs * num_recordings
 site_covs  <- do.call(rbind, replicate(n = nrow(recordings), site_covs, simplify = FALSE))
@@ -182,6 +180,12 @@ site_covs <- site_covs %>%
   mutate(Period = rep(recordings$Period, each = num_species)) %>%
   # arrange
   arrange(recording, Species)
+
+## FIX THIS^^
+missing_species <- setdiff(unique(detections$Species), unique(df$Species))
+missing_species
+detections[detections$Species %in% missing_species, c("recording", "Species")]
+##
 
 dim(site_covs)
 num_species*num_recordings # change to your number of species
@@ -473,10 +477,10 @@ head(new_predictions)
 
 # try a graph -
 psi_graph <- ggplot(new_predictions,
-       aes(x = Mean_Peak_Freq,
-           y = est,
-           group = Max_Duration_s,
-           color = Max_Duration_s)) +
+                    aes(x = Mean_Peak_Freq,
+                        y = est,
+                        group = Max_Duration_s,
+                        color = Max_Duration_s)) +
   geom_line() +
   facet_grid(Period ~ Tone_Type) +
   scale_color_viridis_c() +
@@ -533,7 +537,7 @@ plot_df <- modAvgpsi %>%
     mean_est = mean(est),
     se_est = mean(se),
     .groups = "drop"
-)
+  )
 
 psi_tone_type <- ggplot(plot_df, aes(x = Period, y = mean_est, fill = Tone_Type)) +
   geom_col(position = position_dodge(width = .9)) +

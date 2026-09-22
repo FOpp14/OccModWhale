@@ -3,9 +3,9 @@
 #   2. ModelingSetupLoop.R
 
 # Edit this file before running the analysis!
+# Defaults were used in Oppenheimer et al. 2026
 
-# FO
-# 9/4/26
+# FO 2026
 
 
 # Project Directories ---------------------------------
