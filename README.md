@@ -103,7 +103,7 @@ Descriptions of parameters can be found in the script!
 </details>
 
 
-<details style="display: inline-block;"><summary style="display: inline-block;"> 6. Preformat your song unit selections using FormattingData.R </summary>
+<details style="display: inline-block;"><summary style="display: inline-block;"> 6. Preformat your song unit selections by running FormattingData.R </summary>
 
 <br>
 <blockquote>
