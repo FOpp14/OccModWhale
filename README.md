@@ -96,8 +96,7 @@ Make sure to put them in the same folder as your R project!
 
 <br>
 </blockquote>
-
-
+Descriptions of parameters can be found in the script!
 </blockquote>
 <br>
 
