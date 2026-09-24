@@ -172,7 +172,7 @@ Lines 408-647: Graphing your results!
 
 ____________________________________________________________________
 
-We hope this repo is helpful for you and your project! If you have any questions or comments, feel free to reach out at occmodwhale@foppenheimer.com!
+We hope this work is helpful for you and your project! If you have any questions or comments, feel free to reach out at occmodwhale@foppenheimer.com!
 
 🐋 🎶 ❤️
 
