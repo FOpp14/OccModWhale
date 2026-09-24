@@ -133,7 +133,9 @@ And so on and so forth, with one row for each selection made (from all of the in
 <br>
 <blockquote>
 
-After you read in your preformatted metadata for your selections (henceforth called “detections”) and recordings (henceforth called “recordings”)
+After you read in your preformatted metadata for your selections (henceforth called “detections”) and recordings (henceforth called “recordings”)...
+
+<br>
 
 Lines 14-31: formatting for your detections dataframe. You may have to change this formatting depending on how you labeled your selections.
 
