@@ -2,7 +2,7 @@ ____________________________________________________________________
 
 # Hello and welcome to OccModWhale! 🐋
 
-This repo contains scripts and instructions for using occupancy modeling in R as a framework for distinguishing the effects of sampling limitation from true song change and for identifying key features affecting signal presence and detection over time.
+This repo contains scripts and instructions for using occupancy modeling in R as a framework for distinguishing the effects of sampling limitation from true change in whale song and for identifying key features affecting signal presence and detection over time.
 
 ____________________________________________________________________
 
