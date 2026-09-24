@@ -95,7 +95,7 @@ Make sure to put them in the same folder as your R project!
 <details style="display: inline-block;"><summary style="display: inline-block;"> 5. Establish your desired configurations using Config.R </summary>
 
 <br>
-</blockquote>
+<blockquote>
 Descriptions of parameters can be found in the script!
 </blockquote>
 <br>
