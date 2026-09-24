@@ -14,15 +14,13 @@ ____________________________________________________________________
 
 ### Things You Will Need:
 
-- [R](https://www.r-project.org/]) downloaded and installed onto your machine
+- [R](https://www.r-project.org/]) downloaded to your machine
 
-- The [RPresence package](https://www.usgs.gov/software/presence), which we used in R to build and run our occupancy models, downloaded and installed
+-  _Config.R_ from this github repo
 
-- The file _Config.R_ from this github repo
+- _FormattingData.R_ from this github repo
 
-- The file _FormattingData.R_ from this github repo
-
-- The file _ModelingSetupLoop.R_ from this github repo
+- _ModelingSetupLoop.R_ from this github repo
 
 - Your own song unit selection tables from Raven, Audacity, Reaper, etc. - this script uses Raven as default
 
@@ -32,17 +30,41 @@ ____________________________________________________________________
 
 ### Use Checklist:
 
-☐ Establish your desired configurations using _Config.R_
+☐ Preformat your recordings metadata manually by setting up a descriptive excel document (see section 1 below)
 
-☐ Preformat your song unit selections using _FormattingData.R_
+☐ Install R from terminal
 
-☐ Preformat your recordings metadata manually by setting up a descriptive excel document
+'brew install r'
 
-☐ Run _ModelingSetupLoop.R_ to model and graph your results
+☐ RECOMMENDED: install [Rstudio](https://posit.co/downloads)
+
+☐ Install [RPresence](https://www.usgs.gov/software/presence)
+
+'install.packages("RPresence")
+library(RPresence)'
+
+☐ Open _Config.R_, _FormattingData.R_, _ModelingSetupLoop.R_
+
+☐ Establish your desired configurations using _Config.R_ (see section 2 below)
+
+☐ Preformat your song unit selections using _FormattingData.R_ (see section 3 below)
+
+☐ Run _ModelingSetupLoop.R_ to model and graph your results (see section 4 below)
 
 ____________________________________________________________________
 
-### Preformatting Your Selection Tables:
+### 1. Preformatting Your Recordings Metadata:
+
+Your metadata for your recordings, including the variables you want to test through your occupancy models, should include a column for the file name, and one column for each respective variable you are testing. This script wants it as an excel sheet - the default naming convention is Recordings.xlsx.
+
+____________________________________________________________________
+
+### 2. Establishing your Desired Configurations:
+
+
+____________________________________________________________________
+
+### 3. Preformatting Your Selection Tables:
 
 To identify and distinguish between unit types, we used the system developed by Divna Djokic and Franny Oppenheimer, as described in [Oppenheimer 2024](https://scholarworks.uvm.edu/server/api/core/bitstreams/9ad3f2a6-a87f-416e-97a6-71720fee42ae/content).
 
@@ -62,13 +84,7 @@ And so on and so forth, with one row for each selection made (from all of the in
 
 ____________________________________________________________________
 
-### Preformatting Your Recordings Metadata:
-
-Your metadata for your recordings, including the variables you want to test through your occupancy models, should include a column for the file name, and one column for each respective variable you are testing. This script wants it as an excel sheet - the default naming convention is Recordings.xlsx.
-
-____________________________________________________________________
-
-### Running ModelingSetupLoop.R, and occupancy modeling!
+### 4. Running ModelingSetupLoop.R, and occupancy modeling!
 
 After you read in your preformatted metadata for your selections (henceforth called “detections”) and recordings (henceforth called “recordings”)
 
