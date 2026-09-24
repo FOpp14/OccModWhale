@@ -107,7 +107,7 @@ Lines 408-647: Graphing your results!
 
 ____________________________________________________________________
 
-This repository is licensed MIT. Attribution appreciated!
+This repository is MIT-licensed. Attribution appreciated!
 ____________________________________________________________________
 
 We hope this repo is helpful for you and your project! If you have any questions or comments, feel free to reach out at occmodwhale@foppenheimer.com!
