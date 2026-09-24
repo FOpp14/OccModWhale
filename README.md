@@ -33,8 +33,8 @@ ____________________________________________________________________
 <details>
   <summary>☐ Preformat your recordings metadata manually by setting up a descriptive excel document</summary>
 
-	<!-- Notice the empty line above this comment -->
-	
+<br> 
+
 Your metadata for your recordings, including the variables you want to test through your occupancy models, should include a column for the file name, and one column for each respective variable you are testing. This script wants it as an excel sheet - the default naming convention is Recordings.xlsx.
 
 </details>
