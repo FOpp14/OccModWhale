@@ -1,6 +1,6 @@
 ____________________________________________________________________
 
-# Hello and welcome to OccModWhale!
+# Hello and welcome to OccModWhale! 🐋
 
 This repo contains scripts and instructions for using occupancy modeling in R as a framework for distinguishing the effects of sampling limitation from true song change and for identifying key features affecting signal presence and detection over time.
 
@@ -8,76 +8,107 @@ ____________________________________________________________________
 
 You can read about our proposed methodology in [Oppenheimer et al. 2026](https://onlinelibrary.wiley.com/doi/10.1111/mms.70237?af=R ).
 
-Before you dive in, we recommend familiarizing yourself with the content using [occupancyTuts](https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/2041-210X.14285), a tutorial series about occupancy modeling and RPresence. 
+Before you dive in, we recommend familiarizing yourself with the content using [occupancyTuts](https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/2041-210X.14285), a tutorial series about occupancy modeling and [RPresence](https://www.usgs.gov/software/presence), the package we are using for occupancy modeling. 
 
 ____________________________________________________________________
 
 ### Things You Will Need:
 
-- [R](https://www.r-project.org/]) downloaded to your machine
+💻 [R](https://www.r-project.org/]) downloaded to your machine
 
--  _Config.R_ from this github repo
+📄 _Config.R_ from this github repo
 
-- _FormattingData.R_ from this github repo
+📄 _FormattingData.R_ from this github repo
 
-- _ModelingSetupLoop.R_ from this github repo
+📄 _ModelingSetupLoop.R_ from this github repo
 
-- Your own song unit selection tables from Raven, Audacity, Reaper, etc. - this script uses Raven as default
+📊 Your own song unit selection tables from Raven, Audacity, Reaper, etc. - this script uses Raven as default
 
-- Your own recordings metadata
+📊 Your own recordings metadata
 
 ____________________________________________________________________
 
-### Use Checklist:
+### How to Use OccModWhale (A Step-by-Step Guide):
 
-<details>
-  <summary>☐ Preformat your recordings metadata manually by setting up a descriptive excel document</summary>
+<details style="display: inline-block;"><summary> 1. Preformat your recordings metadata manually by setting up a descriptive excel document </summary>
 
-<br> 
-
+<br>
+<blockquote>
 Your metadata for your recordings, including the variables you want to test through your occupancy models, should include a column for the file name, and one column for each respective variable you are testing. This script wants it as an excel sheet - the default naming convention is Recordings.xlsx.
+</blockquote>
+<br>
 
 </details>
 
-☐ Install R from terminal
+<details style="display: inline-block;"><summary style="display: inline-block;"> 2. Install R from terminal </summary>
+
+<br>
+<blockquote>
+On Mac:
 
 ```
 brew install r
+R --version # check to make sure it worked
 ```
 
-☐ RECOMMENDED: install [Rstudio](https://posit.co/downloads)
+On Windows:
 
-☐ Install [RPresence](https://www.usgs.gov/software/presence)
+```
+winget install RProject.R
+R --version # check to make sure it worked
+```
+
+Create a new R project for this work!
+
+RECOMMENDED: install [Rstudio](https://posit.co/downloads)
+</blockquote>
+<br>
+
+</details>
+
+<details style="display: inline-block;"><summary style="display: inline-block;"> 3. Install RPresence </summary>
+
+<br>
+<blockquote>
 
 ```
 install.packages("RPresence")
 library(RPresence)
 ```
 
-☐ Open _Config.R_, _FormattingData.R_, _ModelingSetupLoop.R_
+</blockquote>
+<br>
 
-☐ Establish your desired configurations using _Config.R_ (see section 2 below)
+</details>
 
-☐ Preformat your song unit selections using _FormattingData.R_ (see section 3 below)
+<details style="display: inline-block;"><summary style="display: inline-block;"> 4. Open Config.R, FormattingData.R, ModelingSetupLoop.R </summary>
 
-☐ Run _ModelingSetupLoop.R_ to model and graph your results (see section 4 below)
+<br>
+<blockquote>
+Make sure to put them in the same folder as your R project!
+</blockquote>
+<br>
 
-____________________________________________________________________
-
-### 1. Preformatting Your Recordings Metadata:
-
-Your metadata for your recordings, including the variables you want to test through your occupancy models, should include a column for the file name, and one column for each respective variable you are testing. This script wants it as an excel sheet - the default naming convention is Recordings.xlsx.
-
-____________________________________________________________________
-
-### 2. Establishing your Desired Configurations:
+</details>
 
 
-____________________________________________________________________
+<details style="display: inline-block;"><summary style="display: inline-block;"> 5. Establish your desired configurations using Config.R </summary>
 
-### 3. Preformatting Your Selection Tables:
+<br>
+</blockquote>
 
-To identify and distinguish between unit types, we used the system developed by Divna Djokic and Franny Oppenheimer, as described in [Oppenheimer 2024](https://scholarworks.uvm.edu/server/api/core/bitstreams/9ad3f2a6-a87f-416e-97a6-71720fee42ae/content).
+
+</blockquote>
+<br>
+
+</details>
+
+
+<details style="display: inline-block;"><summary style="display: inline-block;"> 6. Preformat your song unit selections using FormattingData.R </summary>
+
+<br>
+<blockquote>
+To identify and distinguish between unit types, we used the system developed by Divna Djokic and Franny Oppenheimer, as described in Oppenheimer 2024 (https://scholarworks.uvm.edu/server/api/core/bitstreams/9ad3f2a6-a87f-416e-97a6-71720fee42ae/content).
 
 The formatting document _FormattingData.R_ expects input in the form of multiple RavenPro selection tables in a single folder. If you are using selection tables from another software (Audacity, Reaper, etc.), you will have to adjust the code accordingly.
 
@@ -92,14 +123,17 @@ With your data included, it should look like this:
 <img width="1634" height="478" alt="Screenshot 2026-09-15 at 5 49 32 PM" src="https://github.com/user-attachments/assets/4847dc2c-940e-41bd-9f91-416e3e07f28e" />
 
 And so on and so forth, with one row for each selection made (from all of the inputted tables combined).
+</blockquote>
+<br>
 
-____________________________________________________________________
+</details>
 
-### 4. Running ModelingSetupLoop.R, and occupancy modeling!
-
-After you read in your preformatted metadata for your selections (henceforth called “detections”) and recordings (henceforth called “recordings”)
+<details style="display: inline-block;"><summary style="display: inline-block;"> 7. Run ModelingSetupLoop.R to model and graph your results </summary>
 
 <br>
+<blockquote>
+
+After you read in your preformatted metadata for your selections (henceforth called “detections”) and recordings (henceforth called “recordings”)
 
 Lines 14-31: formatting for your detections dataframe. You may have to change this formatting depending on how you labeled your selections.
 
@@ -131,6 +165,10 @@ Lines 225-256: creating model sets for occupancy probability (“psimodels”) a
 Lines 260-406: Occupancy modeling! Removing models with issues, creating an AIC table and a beta coefficients table.
 
 Lines 408-647: Graphing your results!
+</blockquote>
+<br>
+
+</details>
 
 ____________________________________________________________________
 
