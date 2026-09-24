@@ -34,18 +34,18 @@ ____________________________________________________________________
 
 ☐ Install R from terminal
 
-'''
+```
 brew install r
-'''
+```
 
 ☐ RECOMMENDED: install [Rstudio](https://posit.co/downloads)
 
 ☐ Install [RPresence](https://www.usgs.gov/software/presence)
 
-'''
+```
 install.packages("RPresence")
 library(RPresence)
-'''
+```
 
 ☐ Open _Config.R_, _FormattingData.R_, _ModelingSetupLoop.R_
 
