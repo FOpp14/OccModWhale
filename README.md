@@ -35,9 +35,19 @@ ____________________________________________________________________
 <br>
 <blockquote>
 Your metadata for your recordings, including the variables you want to test through your occupancy models, should include a column for the file name, and one column for each respective variable you are testing. This script wants it as an excel sheet - the default naming convention is Recordings.xlsx.
+<br>
+<br>
+It should look like this...
+<br>
+<br>
+<img width="1636" height="222" alt="Screenshot 2026-09-27 at 9 56 04 PM" src="https://github.com/user-attachments/assets/e723c0c9-6f01-43a9-9971-828f05abe5c4" />
+<br>
+(example data)
+<br>
+<br>
+...with the variables you are testing substituted for Date, StartTime, Duration_sec, PercentwithSong, Lat, Long, Beaufort, Swell_ft, and SST.
 </blockquote>
 <br>
-
 </details>
 
 <details style="display: inline-block;"><summary style="display: inline-block;"> 2. Install R from terminal </summary>
@@ -114,14 +124,21 @@ The formatting document _FormattingData.R_ expects input in the form of multiple
 Each selection table should have an additional annotation columm labeled “Designation”, into which you should have input your own unique unit label for each selection (ex. “21123”, “A”, “1.2”, “Unit1”). If you are not using the naming conventions as detailed in Oppenheimer 2024, you may have to adjust your process accordingly (as noted in FormattingData.R).
 
 Run _FormattingData.R_ on your selection files. The end product should be a csv file titled “selections_metadata.csv”, with columns formatted exactly as follows if you followed the naming conventions in Oppenheimer 2024:
-
+<br>
+<br>
 <img width="1636" height="92" alt="Screenshot 2026-09-15 at 5 48 57 PM" src="https://github.com/user-attachments/assets/016e2b25-a5e8-49d8-8041-fa8a4b2d0f71" />
-
+<br>
+<br>
 With your data included, it should look like this:
-
-<img width="1634" height="478" alt="Screenshot 2026-09-15 at 5 49 32 PM" src="https://github.com/user-attachments/assets/4847dc2c-940e-41bd-9f91-416e3e07f28e" />
-
-And so on and so forth, with one row for each selection made (from all of the inputted tables combined).
+<br>
+<br>
+<img width="1640" height="386" alt="Screenshot 2026-09-27 at 10 00 26 PM" src="https://github.com/user-attachments/assets/a8eb87a2-8239-480f-905a-acd48a649309" />
+<br>
+<br>
+And so on and so forth, with one row for each selection made (from all of the inputted tables combined). 
+<br>
+<br>
+If you did not follow the naming conventions in Oppenheimer 2024 and/or are using alternative variables, your column names may look different. The two columns that will always be the same are "Site", which houses the name of the csv file each selection came from, and "Species", which houses your personal designation for each selection.
 </blockquote>
 <br>
 
@@ -152,6 +169,7 @@ Lines 196-237: Creating survey covariates (“survey_covs”) out of recordings.
 
 <img width="1484" height="834" alt="Screenshot 2026-09-15 at 5 52 43 PM" src="https://github.com/user-attachments/assets/cb735876-5472-4877-844f-d65f58203f87" />
 
+<br>
 <br>
 
 Lines 239 to 257: creating model sets for occupancy probability (“psimodels”) and detection probability (“pmodels”)
