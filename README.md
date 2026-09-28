@@ -58,14 +58,36 @@ On Mac:
 
 ```
 brew install r
-R --version # check to make sure it worked
+R --version # check to make sure it worked, and what version you have - you will need r version 4.3 to run RPresence
+
+# if it's not the correct version, install rig
+brew install r-rig
+
+# add the correct version via rig
+rig add 4.3
+rig list # make sure it installed!
+rig default 4.3 # make this version the default
+
+R --version # check again to make sure the correct version of R is in use
+
 ```
 
 On Windows:
 
 ```
 winget install RProject.R
-R --version # check to make sure it worked
+R --version # check to make sure it worked, and what version you have - you will need r version 4.3 to run RPresence
+
+# if it's not the correct version, install rig
+winget install r-lib.rig
+
+# add the correct version via rig
+rig add 4.3
+rig list # make sure it installed!
+rig default 4.3 # make this version the default
+
+R --version # check again to make sure the correct version of R is in use
+
 ```
 
 Create a new R project for this work!
