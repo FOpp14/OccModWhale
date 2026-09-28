@@ -8,7 +8,7 @@ ____________________________________________________________________
 
 You can read about our proposed methodology in [Oppenheimer et al. 2026](https://onlinelibrary.wiley.com/doi/10.1111/mms.70237?af=R ).
 
-Before you dive in, we recommend familiarizing yourself with the content using [occupancyTuts](https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/2041-210X.14285), a tutorial series about occupancy modeling and [RPresence](https://www.usgs.gov/software/presence), the package we are using for occupancy modeling. 
+Before you dive in, we recommend familiarizing yourself with the content using [occupancyTuts](https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/2041-210X.14285), a tutorial series about occupancy modeling, and [RPresence](https://www.usgs.gov/software/presence), the package we are using for occupancy modeling. 
 
 ____________________________________________________________________
 
