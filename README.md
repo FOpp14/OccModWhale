@@ -14,7 +14,7 @@ ____________________________________________________________________
 
 ### Things You Will Need:
 
-💻 [R](https://www.r-project.org/]) downloaded to your machine
+💻 [R]([https://www.r-project.org/](https://www.r-project.org/)]) downloaded to your machine
 
 📄 _Config.R_ from this github repo
 
