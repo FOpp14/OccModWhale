@@ -139,8 +139,9 @@ Descriptions of parameters can be found in the script!
 
 <br>
 <blockquote>
-To identify and distinguish between unit types, we used the system developed by Divna Djokic and Franny Oppenheimer, as described in Oppenheimer 2024 (https://scholarworks.uvm.edu/server/api/core/bitstreams/9ad3f2a6-a87f-416e-97a6-71720fee42ae/content).
-
+To identify and distinguish between unit types, we used the system developed by Divna Djokic and Franny Oppenheimer, as described in <a href="https://scholarworks.uvm.edu/server/api/core/bitstreams/9ad3f2a6-a87f-416e-97a6-71720fee42ae/content">Oppenheimer 2024</a>.
+<br>
+<br>
 The formatting document _FormattingData.R_ expects input in the form of multiple RavenPro selection tables in a single folder. If you are using selection tables from another software (Audacity, Reaper, etc.), you will have to adjust the code accordingly.
 
 Each selection table should have an additional annotation columm labeled “Designation”, into which you should have input your own unique unit label for each selection (ex. “21123”, “A”, “1.2”, “Unit1”). If you are not using the naming conventions as detailed in Oppenheimer 2024, you may have to adjust your process accordingly (as noted in FormattingData.R).
