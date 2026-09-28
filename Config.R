@@ -11,10 +11,12 @@
 # Project Directories ---------------------------------
 
 # main occupancy-model project directory
-project_dir <- "/PATH/TO/YOUR/PROJECT"
+#project_dir <- "/PATH/TO/YOUR/PROJECT"
+project_dir <- "~/OccModWhale"
 
 # folder containing selection CSV files
-selections_dir <- "PATH/TO/YOUR/CSV/FOLDER"
+#selections_dir <- "PATH/TO/YOUR/CSV/FOLDER"
+selections_dir <- "/Users/frannyoppenheimer/OccModTest/2007-2023 CSVs"
 
 # recording metadata excel file
 recordings_file <- file.path(

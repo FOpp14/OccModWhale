@@ -12,7 +12,13 @@ filelist <- list.files(selections_dir, full.names = FALSE)
 #filelist <- gsub(" ", "_", filelist) # get rid of any lingering spaces
 filelist
 
+# remove any lingering spaces from your filenames (they will mess you up later!)
+new_names <- gsub(" ", "", filelist)
 
+file.rename(
+  file.path(selections_dir, filelist), # rename in filelist
+  file.path(selections_dir, new_names) # rename the actual files
+)
 
 # Create an empty data frame
 
