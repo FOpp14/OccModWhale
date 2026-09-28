@@ -181,7 +181,6 @@ site_covs <- site_covs %>%
   # arrange
   arrange(recording, Species)
 
-## FIX THIS^^
 missing_species <- setdiff(unique(detections$Species), unique(df$Species))
 missing_species
 detections[detections$Species %in% missing_species, c("recording", "Species")]
