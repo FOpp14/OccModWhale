@@ -120,11 +120,13 @@ Descriptions of parameters can be found in the script!
 To identify and distinguish between unit types, we used the system developed by Divna Djokic and Franny Oppenheimer, as described in <a href="https://scholarworks.uvm.edu/server/api/core/bitstreams/9ad3f2a6-a87f-416e-97a6-71720fee42ae/content">Oppenheimer 2024</a>.
 <br>
 <br>
-The formatting document _FormattingData.R_ expects input in the form of multiple RavenPro selection tables in a single folder. If you are using selection tables from another software (Audacity, Reaper, etc.), you will have to adjust the code accordingly.
-
+The formatting document FormattingData.R expects input in the form of multiple RavenPro selection tables in a single folder. If you are using selection tables from another software (Audacity, Reaper, etc.), you will have to adjust the code accordingly.
+<br>
+<br>
 Each selection table should have an additional annotation columm labeled “Designation”, into which you should have input your own unique unit label for each selection (ex. “21123”, “A”, “1.2”, “Unit1”). If you are not using the naming conventions as detailed in Oppenheimer 2024, you may have to adjust your process accordingly (as noted in FormattingData.R).
-
-Run _FormattingData.R_ on your selection files. The end product should be a csv file titled “selections_metadata.csv”, with columns formatted exactly as follows if you followed the naming conventions in Oppenheimer 2024:
+<br>
+<br>
+Run FormattingData.R on your selection files. The end product should be a csv file titled “selections_metadata.csv”, with columns formatted exactly as follows if you followed the naming conventions in Oppenheimer 2024:
 <br>
 <br>
 <img width="1636" height="92" alt="Screenshot 2026-09-15 at 5 48 57 PM" src="https://github.com/user-attachments/assets/016e2b25-a5e8-49d8-8041-fa8a4b2d0f71" />
