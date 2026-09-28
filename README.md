@@ -18,7 +18,7 @@ ____________________________________________________________________
 
 📄 _Config.R_ from this github repo
 
-📄 _FormattingData.R_ from this github repo
+📄 _FormattingSelections.R_ from this github repo
 
 📄 _ModelingSetupLoop.R_ from this github repo
 
