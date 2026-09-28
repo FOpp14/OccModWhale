@@ -59,7 +59,6 @@ On Mac:
 ```
 brew install r
 R --version # check to make sure it worked
-
 ```
 
 On Windows:
@@ -67,7 +66,6 @@ On Windows:
 ```
 winget install RProject.R
 R --version # check to make sure it worked
-
 ```
 
 Create a new R project for this work!
