@@ -189,6 +189,12 @@ Lines 411-649: Graphing your results!
 
 ____________________________________________________________________
 
+If you are using this repository in your own project, please cite as follows:
+
+Oppenheimer, F., Donovan, T., Hines, J., Rasmussen, K., May-Collado, L. J. 2026. “ An Alternative Approach to Studying Humpback Whale Song Changes Over Time Using Occupancy Models.” Marine Mammal Science 42, no. 4: e70237. https://doi.org/10.1111/mms.70237.
+<br>
+____________________________________________________________________
+
 We hope this work is helpful for you and your project! If you have any questions or comments, feel free to reach out at occmodwhale@foppenheimer.com!
 
 🐋 🎶 ❤️
