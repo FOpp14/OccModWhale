@@ -101,7 +101,7 @@ period_years <- list(
 # Number of recordings
 num_recordings <- 17
 
-# Number of surveys per recording
+# Number of surveys per recording (how you are pseudoreplicating)
 num_surveys <- 2
 
 # Survey Covariates ---------------------------------
@@ -133,7 +133,7 @@ Year_subtract <- 2000
 
 
 # Variables for modeling detection probability  ---------------------------------
-# use survey to offset bias due to splitting recordings
+# Use survey to offset bias due to splitting recordings
 
 detection_models <- c(
   "SURVEY * Period",
