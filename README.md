@@ -136,21 +136,17 @@ After you read in your preformatted metadata for your selections (henceforth cal
 
 <br>
 
-Lines 14-31: formatting for your detections dataframe. You may have to change this formatting depending on how you labeled your selections.
+Lines 14-33: formatting for your detections dataframe. You may have to change this formatting depending on how you labeled your selections.
 
-Lines 34-49: formatting for your recordings dataframe. You may have to change this formatting depending on the variables you are using.
+Lines 36-63: formatting for your recordings dataframe. You may have to change this formatting depending on the variables you are testing!
 
-Lines 64-115: merging your dataframe (detections and recordings) into one dataframe, henceforth called “df”. This will be your main dataframe. These lines also include the production of a summary plot (“g_raw”), which details the number of detections of each species within a period.
+Lines 65-116: merging your dataframe (detections and recordings) into one dataframe, henceforth called “df”. This will be your main dataframe. These lines also include the production of a summary plot (“g_raw”), which details the number of detections of each species within a period for your own visualization.
 
-Lines 88-10:  assign surveys to your recordings depending on the number of surveys you want per period. This creates a pseudo-replication of each recording by splitting it into multiple pieces.
+Lines 120-143: Creating an encounter history (“eh”) out of df.
 
-Lines 119-142: Creating an encounter history (“eh”) out of df.
-
-Lines 144-180: Creating site covariates (“site_covs”) out of df.
+Lines 145-194: Creating site covariates (“site_covs”) out of df.
 	
-Lines 182-200: Creating survey covariates (“survey_covs”) out of recordings.
-
-Lines 202-223: Creating a presence-absence object (“pao”) out of survey_covs
+Lines 196-237: Creating survey covariates (“survey_covs”) out of recordings. Includes adding in a variable regarding detection in survey2 to account for likelihood of presence being skewed in technically-related files.
 
 <br>
 
@@ -158,14 +154,13 @@ Lines 202-223: Creating a presence-absence object (“pao”) out of survey_covs
 
 <br>
 
+Lines 239 to 257: creating model sets for occupancy probability (“psimodels”) and detection probability (“pmodels”)
 
-Lines 211-220: Adding in a variable regarding detection in survey2 to account for likelihood of presence being skewed in technically-related files.
+Lines 261-223: Creating a presence-absence object (“pao”) out of survey_covs
 
-Lines 225-256: creating model sets for occupancy probability (“psimodels”) and detection probability (“pmodels”)
+Lines 272-410: Occupancy modeling! Removing models with issues, creating an AIC table and a beta coefficients table.
 
-Lines 260-406: Occupancy modeling! Removing models with issues, creating an AIC table and a beta coefficients table.
-
-Lines 408-647: Graphing your results!
+Lines 411-649: Graphing your results!
 </blockquote>
 <br>
 
