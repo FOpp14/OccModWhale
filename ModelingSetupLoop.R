@@ -1,5 +1,5 @@
 # Setting up a loop for easy-editing of models
-# FO, TD, 2025
+# FO 2025
 
 library(dplyr)
 library(tidyr)
